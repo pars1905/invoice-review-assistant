@@ -1,0 +1,702 @@
+[
+  {
+    "id": "valid_standard-01",
+    "category": "valid_standard",
+    "text": "Invoice: INV-001\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": true,
+    "already_posted": false
+  },
+  {
+    "id": "valid_unsupported_format-01",
+    "category": "valid_unsupported_format",
+    "text": "Invoice No: INV-001\nSupplier: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": true,
+    "already_posted": false
+  },
+  {
+    "id": "total_mismatch-01",
+    "category": "total_mismatch",
+    "text": "Invoice: INV-001\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 32.00\n",
+    "expected_accept": false,
+    "already_posted": false
+  },
+  {
+    "id": "po_mismatch-01",
+    "category": "po_mismatch",
+    "text": "Invoice: INV-001\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 3 | 12.50 | 37.50\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 43.50\n",
+    "expected_accept": false,
+    "already_posted": false
+  },
+  {
+    "id": "duplicate_posted-01",
+    "category": "duplicate_posted",
+    "text": "Invoice: INV-001\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": false,
+    "already_posted": true
+  },
+  {
+    "id": "valid_standard-02",
+    "category": "valid_standard",
+    "text": "Invoice: INV-002\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": true,
+    "already_posted": false
+  },
+  {
+    "id": "valid_unsupported_format-02",
+    "category": "valid_unsupported_format",
+    "text": "Invoice No: INV-002\nSupplier: Acme Supplies\nPurchase Order: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": true,
+    "already_posted": false
+  },
+  {
+    "id": "total_mismatch-02",
+    "category": "total_mismatch",
+    "text": "Invoice: INV-002\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 32.00\n",
+    "expected_accept": false,
+    "already_posted": false
+  },
+  {
+    "id": "po_mismatch-02",
+    "category": "po_mismatch",
+    "text": "Invoice: INV-002\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 3 | 12.50 | 37.50\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 43.50\n",
+    "expected_accept": false,
+    "already_posted": false
+  },
+  {
+    "id": "duplicate_posted-02",
+    "category": "duplicate_posted",
+    "text": "Invoice: INV-002\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": false,
+    "already_posted": true
+  },
+  {
+    "id": "valid_standard-03",
+    "category": "valid_standard",
+    "text": "Invoice: INV-003\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": true,
+    "already_posted": false
+  },
+  {
+    "id": "valid_unsupported_format-03",
+    "category": "valid_unsupported_format",
+    "text": "Invoice No: INV-003\nSupplier: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": true,
+    "already_posted": false
+  },
+  {
+    "id": "total_mismatch-03",
+    "category": "total_mismatch",
+    "text": "Invoice: INV-003\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 32.00\n",
+    "expected_accept": false,
+    "already_posted": false
+  },
+  {
+    "id": "po_mismatch-03",
+    "category": "po_mismatch",
+    "text": "Invoice: INV-003\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 3 | 12.50 | 37.50\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 43.50\n",
+    "expected_accept": false,
+    "already_posted": false
+  },
+  {
+    "id": "duplicate_posted-03",
+    "category": "duplicate_posted",
+    "text": "Invoice: INV-003\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": false,
+    "already_posted": true
+  },
+  {
+    "id": "valid_standard-04",
+    "category": "valid_standard",
+    "text": "Invoice: INV-004\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": true,
+    "already_posted": false
+  },
+  {
+    "id": "valid_unsupported_format-04",
+    "category": "valid_unsupported_format",
+    "text": "Invoice No: INV-004\nSupplier: Acme Supplies\nPurchase Order: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": true,
+    "already_posted": false
+  },
+  {
+    "id": "total_mismatch-04",
+    "category": "total_mismatch",
+    "text": "Invoice: INV-004\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 32.00\n",
+    "expected_accept": false,
+    "already_posted": false
+  },
+  {
+    "id": "po_mismatch-04",
+    "category": "po_mismatch",
+    "text": "Invoice: INV-004\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 3 | 12.50 | 37.50\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 43.50\n",
+    "expected_accept": false,
+    "already_posted": false
+  },
+  {
+    "id": "duplicate_posted-04",
+    "category": "duplicate_posted",
+    "text": "Invoice: INV-004\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": false,
+    "already_posted": true
+  },
+  {
+    "id": "valid_standard-05",
+    "category": "valid_standard",
+    "text": "Invoice: INV-005\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": true,
+    "already_posted": false
+  },
+  {
+    "id": "valid_unsupported_format-05",
+    "category": "valid_unsupported_format",
+    "text": "Invoice No: INV-005\nSupplier: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": true,
+    "already_posted": false
+  },
+  {
+    "id": "total_mismatch-05",
+    "category": "total_mismatch",
+    "text": "Invoice: INV-005\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 32.00\n",
+    "expected_accept": false,
+    "already_posted": false
+  },
+  {
+    "id": "po_mismatch-05",
+    "category": "po_mismatch",
+    "text": "Invoice: INV-005\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 3 | 12.50 | 37.50\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 43.50\n",
+    "expected_accept": false,
+    "already_posted": false
+  },
+  {
+    "id": "duplicate_posted-05",
+    "category": "duplicate_posted",
+    "text": "Invoice: INV-005\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": false,
+    "already_posted": true
+  },
+  {
+    "id": "valid_standard-06",
+    "category": "valid_standard",
+    "text": "Invoice: INV-006\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": true,
+    "already_posted": false
+  },
+  {
+    "id": "valid_unsupported_format-06",
+    "category": "valid_unsupported_format",
+    "text": "Invoice No: INV-006\nSupplier: Acme Supplies\nPurchase Order: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": true,
+    "already_posted": false
+  },
+  {
+    "id": "total_mismatch-06",
+    "category": "total_mismatch",
+    "text": "Invoice: INV-006\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 32.00\n",
+    "expected_accept": false,
+    "already_posted": false
+  },
+  {
+    "id": "po_mismatch-06",
+    "category": "po_mismatch",
+    "text": "Invoice: INV-006\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 3 | 12.50 | 37.50\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 43.50\n",
+    "expected_accept": false,
+    "already_posted": false
+  },
+  {
+    "id": "duplicate_posted-06",
+    "category": "duplicate_posted",
+    "text": "Invoice: INV-006\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": false,
+    "already_posted": true
+  },
+  {
+    "id": "valid_standard-07",
+    "category": "valid_standard",
+    "text": "Invoice: INV-007\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": true,
+    "already_posted": false
+  },
+  {
+    "id": "valid_unsupported_format-07",
+    "category": "valid_unsupported_format",
+    "text": "Invoice No: INV-007\nSupplier: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": true,
+    "already_posted": false
+  },
+  {
+    "id": "total_mismatch-07",
+    "category": "total_mismatch",
+    "text": "Invoice: INV-007\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 32.00\n",
+    "expected_accept": false,
+    "already_posted": false
+  },
+  {
+    "id": "po_mismatch-07",
+    "category": "po_mismatch",
+    "text": "Invoice: INV-007\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 3 | 12.50 | 37.50\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 43.50\n",
+    "expected_accept": false,
+    "already_posted": false
+  },
+  {
+    "id": "duplicate_posted-07",
+    "category": "duplicate_posted",
+    "text": "Invoice: INV-007\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": false,
+    "already_posted": true
+  },
+  {
+    "id": "valid_standard-08",
+    "category": "valid_standard",
+    "text": "Invoice: INV-008\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": true,
+    "already_posted": false
+  },
+  {
+    "id": "valid_unsupported_format-08",
+    "category": "valid_unsupported_format",
+    "text": "Invoice No: INV-008\nSupplier: Acme Supplies\nPurchase Order: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": true,
+    "already_posted": false
+  },
+  {
+    "id": "total_mismatch-08",
+    "category": "total_mismatch",
+    "text": "Invoice: INV-008\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 32.00\n",
+    "expected_accept": false,
+    "already_posted": false
+  },
+  {
+    "id": "po_mismatch-08",
+    "category": "po_mismatch",
+    "text": "Invoice: INV-008\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 3 | 12.50 | 37.50\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 43.50\n",
+    "expected_accept": false,
+    "already_posted": false
+  },
+  {
+    "id": "duplicate_posted-08",
+    "category": "duplicate_posted",
+    "text": "Invoice: INV-008\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": false,
+    "already_posted": true
+  },
+  {
+    "id": "valid_standard-09",
+    "category": "valid_standard",
+    "text": "Invoice: INV-009\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": true,
+    "already_posted": false
+  },
+  {
+    "id": "valid_unsupported_format-09",
+    "category": "valid_unsupported_format",
+    "text": "Invoice No: INV-009\nSupplier: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": true,
+    "already_posted": false
+  },
+  {
+    "id": "total_mismatch-09",
+    "category": "total_mismatch",
+    "text": "Invoice: INV-009\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 32.00\n",
+    "expected_accept": false,
+    "already_posted": false
+  },
+  {
+    "id": "po_mismatch-09",
+    "category": "po_mismatch",
+    "text": "Invoice: INV-009\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 3 | 12.50 | 37.50\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 43.50\n",
+    "expected_accept": false,
+    "already_posted": false
+  },
+  {
+    "id": "duplicate_posted-09",
+    "category": "duplicate_posted",
+    "text": "Invoice: INV-009\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": false,
+    "already_posted": true
+  },
+  {
+    "id": "valid_standard-10",
+    "category": "valid_standard",
+    "text": "Invoice: INV-010\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": true,
+    "already_posted": false
+  },
+  {
+    "id": "valid_unsupported_format-10",
+    "category": "valid_unsupported_format",
+    "text": "Invoice No: INV-010\nSupplier: Acme Supplies\nPurchase Order: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": true,
+    "already_posted": false
+  },
+  {
+    "id": "total_mismatch-10",
+    "category": "total_mismatch",
+    "text": "Invoice: INV-010\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 32.00\n",
+    "expected_accept": false,
+    "already_posted": false
+  },
+  {
+    "id": "po_mismatch-10",
+    "category": "po_mismatch",
+    "text": "Invoice: INV-010\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 3 | 12.50 | 37.50\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 43.50\n",
+    "expected_accept": false,
+    "already_posted": false
+  },
+  {
+    "id": "duplicate_posted-10",
+    "category": "duplicate_posted",
+    "text": "Invoice: INV-010\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": false,
+    "already_posted": true
+  },
+  {
+    "id": "valid_standard-11",
+    "category": "valid_standard",
+    "text": "Invoice: INV-011\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": true,
+    "already_posted": false
+  },
+  {
+    "id": "valid_unsupported_format-11",
+    "category": "valid_unsupported_format",
+    "text": "Invoice No: INV-011\nSupplier: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": true,
+    "already_posted": false
+  },
+  {
+    "id": "total_mismatch-11",
+    "category": "total_mismatch",
+    "text": "Invoice: INV-011\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 32.00\n",
+    "expected_accept": false,
+    "already_posted": false
+  },
+  {
+    "id": "po_mismatch-11",
+    "category": "po_mismatch",
+    "text": "Invoice: INV-011\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 3 | 12.50 | 37.50\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 43.50\n",
+    "expected_accept": false,
+    "already_posted": false
+  },
+  {
+    "id": "duplicate_posted-11",
+    "category": "duplicate_posted",
+    "text": "Invoice: INV-011\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": false,
+    "already_posted": true
+  },
+  {
+    "id": "valid_standard-12",
+    "category": "valid_standard",
+    "text": "Invoice: INV-012\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": true,
+    "already_posted": false
+  },
+  {
+    "id": "valid_unsupported_format-12",
+    "category": "valid_unsupported_format",
+    "text": "Invoice No: INV-012\nSupplier: Acme Supplies\nPurchase Order: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": true,
+    "already_posted": false
+  },
+  {
+    "id": "total_mismatch-12",
+    "category": "total_mismatch",
+    "text": "Invoice: INV-012\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 32.00\n",
+    "expected_accept": false,
+    "already_posted": false
+  },
+  {
+    "id": "po_mismatch-12",
+    "category": "po_mismatch",
+    "text": "Invoice: INV-012\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 3 | 12.50 | 37.50\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 43.50\n",
+    "expected_accept": false,
+    "already_posted": false
+  },
+  {
+    "id": "duplicate_posted-12",
+    "category": "duplicate_posted",
+    "text": "Invoice: INV-012\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": false,
+    "already_posted": true
+  },
+  {
+    "id": "valid_standard-13",
+    "category": "valid_standard",
+    "text": "Invoice: INV-013\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": true,
+    "already_posted": false
+  },
+  {
+    "id": "valid_unsupported_format-13",
+    "category": "valid_unsupported_format",
+    "text": "Invoice No: INV-013\nSupplier: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": true,
+    "already_posted": false
+  },
+  {
+    "id": "total_mismatch-13",
+    "category": "total_mismatch",
+    "text": "Invoice: INV-013\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 32.00\n",
+    "expected_accept": false,
+    "already_posted": false
+  },
+  {
+    "id": "po_mismatch-13",
+    "category": "po_mismatch",
+    "text": "Invoice: INV-013\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 3 | 12.50 | 37.50\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 43.50\n",
+    "expected_accept": false,
+    "already_posted": false
+  },
+  {
+    "id": "duplicate_posted-13",
+    "category": "duplicate_posted",
+    "text": "Invoice: INV-013\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": false,
+    "already_posted": true
+  },
+  {
+    "id": "valid_standard-14",
+    "category": "valid_standard",
+    "text": "Invoice: INV-014\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": true,
+    "already_posted": false
+  },
+  {
+    "id": "valid_unsupported_format-14",
+    "category": "valid_unsupported_format",
+    "text": "Invoice No: INV-014\nSupplier: Acme Supplies\nPurchase Order: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": true,
+    "already_posted": false
+  },
+  {
+    "id": "total_mismatch-14",
+    "category": "total_mismatch",
+    "text": "Invoice: INV-014\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 32.00\n",
+    "expected_accept": false,
+    "already_posted": false
+  },
+  {
+    "id": "po_mismatch-14",
+    "category": "po_mismatch",
+    "text": "Invoice: INV-014\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 3 | 12.50 | 37.50\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 43.50\n",
+    "expected_accept": false,
+    "already_posted": false
+  },
+  {
+    "id": "duplicate_posted-14",
+    "category": "duplicate_posted",
+    "text": "Invoice: INV-014\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": false,
+    "already_posted": true
+  },
+  {
+    "id": "valid_standard-15",
+    "category": "valid_standard",
+    "text": "Invoice: INV-015\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": true,
+    "already_posted": false
+  },
+  {
+    "id": "valid_unsupported_format-15",
+    "category": "valid_unsupported_format",
+    "text": "Invoice No: INV-015\nSupplier: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": true,
+    "already_posted": false
+  },
+  {
+    "id": "total_mismatch-15",
+    "category": "total_mismatch",
+    "text": "Invoice: INV-015\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 32.00\n",
+    "expected_accept": false,
+    "already_posted": false
+  },
+  {
+    "id": "po_mismatch-15",
+    "category": "po_mismatch",
+    "text": "Invoice: INV-015\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 3 | 12.50 | 37.50\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 43.50\n",
+    "expected_accept": false,
+    "already_posted": false
+  },
+  {
+    "id": "duplicate_posted-15",
+    "category": "duplicate_posted",
+    "text": "Invoice: INV-015\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": false,
+    "already_posted": true
+  },
+  {
+    "id": "valid_standard-16",
+    "category": "valid_standard",
+    "text": "Invoice: INV-016\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": true,
+    "already_posted": false
+  },
+  {
+    "id": "valid_unsupported_format-16",
+    "category": "valid_unsupported_format",
+    "text": "Invoice No: INV-016\nSupplier: Acme Supplies\nPurchase Order: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": true,
+    "already_posted": false
+  },
+  {
+    "id": "total_mismatch-16",
+    "category": "total_mismatch",
+    "text": "Invoice: INV-016\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 32.00\n",
+    "expected_accept": false,
+    "already_posted": false
+  },
+  {
+    "id": "po_mismatch-16",
+    "category": "po_mismatch",
+    "text": "Invoice: INV-016\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 3 | 12.50 | 37.50\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 43.50\n",
+    "expected_accept": false,
+    "already_posted": false
+  },
+  {
+    "id": "duplicate_posted-16",
+    "category": "duplicate_posted",
+    "text": "Invoice: INV-016\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": false,
+    "already_posted": true
+  },
+  {
+    "id": "valid_standard-17",
+    "category": "valid_standard",
+    "text": "Invoice: INV-017\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": true,
+    "already_posted": false
+  },
+  {
+    "id": "valid_unsupported_format-17",
+    "category": "valid_unsupported_format",
+    "text": "Invoice No: INV-017\nSupplier: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": true,
+    "already_posted": false
+  },
+  {
+    "id": "total_mismatch-17",
+    "category": "total_mismatch",
+    "text": "Invoice: INV-017\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 32.00\n",
+    "expected_accept": false,
+    "already_posted": false
+  },
+  {
+    "id": "po_mismatch-17",
+    "category": "po_mismatch",
+    "text": "Invoice: INV-017\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 3 | 12.50 | 37.50\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 43.50\n",
+    "expected_accept": false,
+    "already_posted": false
+  },
+  {
+    "id": "duplicate_posted-17",
+    "category": "duplicate_posted",
+    "text": "Invoice: INV-017\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": false,
+    "already_posted": true
+  },
+  {
+    "id": "valid_standard-18",
+    "category": "valid_standard",
+    "text": "Invoice: INV-018\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": true,
+    "already_posted": false
+  },
+  {
+    "id": "valid_unsupported_format-18",
+    "category": "valid_unsupported_format",
+    "text": "Invoice No: INV-018\nSupplier: Acme Supplies\nPurchase Order: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": true,
+    "already_posted": false
+  },
+  {
+    "id": "total_mismatch-18",
+    "category": "total_mismatch",
+    "text": "Invoice: INV-018\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 32.00\n",
+    "expected_accept": false,
+    "already_posted": false
+  },
+  {
+    "id": "po_mismatch-18",
+    "category": "po_mismatch",
+    "text": "Invoice: INV-018\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 3 | 12.50 | 37.50\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 43.50\n",
+    "expected_accept": false,
+    "already_posted": false
+  },
+  {
+    "id": "duplicate_posted-18",
+    "category": "duplicate_posted",
+    "text": "Invoice: INV-018\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": false,
+    "already_posted": true
+  },
+  {
+    "id": "valid_standard-19",
+    "category": "valid_standard",
+    "text": "Invoice: INV-019\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": true,
+    "already_posted": false
+  },
+  {
+    "id": "valid_unsupported_format-19",
+    "category": "valid_unsupported_format",
+    "text": "Invoice No: INV-019\nSupplier: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": true,
+    "already_posted": false
+  },
+  {
+    "id": "total_mismatch-19",
+    "category": "total_mismatch",
+    "text": "Invoice: INV-019\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 32.00\n",
+    "expected_accept": false,
+    "already_posted": false
+  },
+  {
+    "id": "po_mismatch-19",
+    "category": "po_mismatch",
+    "text": "Invoice: INV-019\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 3 | 12.50 | 37.50\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 43.50\n",
+    "expected_accept": false,
+    "already_posted": false
+  },
+  {
+    "id": "duplicate_posted-19",
+    "category": "duplicate_posted",
+    "text": "Invoice: INV-019\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": false,
+    "already_posted": true
+  },
+  {
+    "id": "valid_standard-20",
+    "category": "valid_standard",
+    "text": "Invoice: INV-020\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": true,
+    "already_posted": false
+  },
+  {
+    "id": "valid_unsupported_format-20",
+    "category": "valid_unsupported_format",
+    "text": "Invoice No: INV-020\nSupplier: Acme Supplies\nPurchase Order: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": true,
+    "already_posted": false
+  },
+  {
+    "id": "total_mismatch-20",
+    "category": "total_mismatch",
+    "text": "Invoice: INV-020\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 32.00\n",
+    "expected_accept": false,
+    "already_posted": false
+  },
+  {
+    "id": "po_mismatch-20",
+    "category": "po_mismatch",
+    "text": "Invoice: INV-020\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 3 | 12.50 | 37.50\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 43.50\n",
+    "expected_accept": false,
+    "already_posted": false
+  },
+  {
+    "id": "duplicate_posted-20",
+    "category": "duplicate_posted",
+    "text": "Invoice: INV-020\nVendor: Acme Supplies\nPO: PO-42\nItem: PAPER | 2 | 12.50 | 25.00\nItem: PEN | 3 | 2.00 | 6.00\nTotal: 31.00\n",
+    "expected_accept": false,
+    "already_posted": true
+  }
+]
