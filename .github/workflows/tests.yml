@@ -13,3 +13,5 @@ jobs:
       - run: python3 -m unittest discover -v
       - run: python3 evaluate.py
       - run: docker build -t invoice-assistant .
+      - run: docker run --rm invoice-assistant
+      - run: docker run --rm invoice-assistant python evaluate.py
