@@ -12,3 +12,4 @@ jobs:
           python-version: '3.12'
       - run: python3 -m unittest discover -v
       - run: python3 evaluate.py
+      - run: docker build -t invoice-assistant .
