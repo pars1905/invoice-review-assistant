@@ -25,7 +25,7 @@ def explain(workflow, facts, opener=None):
     with response:
         result = json.load(response)
     chunks = [part.get("text", "") for output in result.get("output", [])
-              for part in output.get("content", []) if part.get("type") == "output_text"]
+              for part in output.get("content") or [] if part.get("type") == "output_text"]
     if not chunks:
         raise RuntimeError("Model response contained no text")
     return "\n".join(chunks)

@@ -40,6 +40,36 @@ class InvoiceTests(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     parse_invoice(text)
 
+    def test_blank_field_does_not_swallow_next_line(self):
+        for label in ("Invoice: INV-101", "Vendor: Acme Supplies", "PO: PO-42"):
+            with self.subTest(label=label):
+                with self.assertRaises(ValueError):
+                    parse_invoice(SAMPLE.replace(label, label.split(":")[0] + ":"))
+
+    def test_duplicate_detection_ignores_case(self):
+        posted = {}
+        post_to_erp(parse_invoice(SAMPLE), PO, True, posted)
+        variant = parse_invoice(SAMPLE.replace("INV-101", "inv-101"))
+        self.assertIn("Invoice already posted", review(variant, PO, posted)["issues"])
+
+    def test_only_plain_decimal_amounts_are_accepted(self):
+        for value in ("1e999999", "3_1.00", "Infinity"):
+            with self.subTest(value=value):
+                with self.assertRaises(ValueError):
+                    parse_invoice(SAMPLE.replace("12.50", value))
+
+    def test_pdf_layout_whitespace_is_tolerated(self):
+        text = SAMPLE.replace("Total:", "\f  Total:").replace("\n", "\r\n")
+        self.assertEqual(str(parse_invoice(text)["total"]), "31.00")
+
+    def test_only_boolean_true_counts_as_approval(self):
+        posted = {}
+        for value in ("false", "no", 1):
+            with self.subTest(value=value):
+                with self.assertRaises(PermissionError):
+                    post_to_erp(parse_invoice(SAMPLE), PO, value, posted)
+        self.assertFalse(posted)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -2,21 +2,32 @@
 import re
 import shutil
 import subprocess
-from decimal import Decimal, InvalidOperation
+from decimal import Decimal
 
 
 FIELDS = {"invoice": ("Invoice", "Invoice No"), "vendor": ("Vendor", "Supplier"),
           "po": ("PO",), "total": ("Total",)}
+AMOUNT = re.compile(r"-?[0-9]+(?:\.[0-9]+)?")
 
 
 def read_document(path):
     if str(path).lower().endswith(".pdf"):
         if not shutil.which("pdftotext"):
             raise RuntimeError("Install pdftotext to read text-layer PDFs")
-        return subprocess.run(["pdftotext", "-layout", str(path), "-"], check=True,
-                              capture_output=True, text=True).stdout
+        return subprocess.run(["pdftotext", "-layout", "-enc", "UTF-8", str(path), "-"], check=True,
+                              capture_output=True, text=True, encoding="utf-8").stdout
     with open(path, encoding="utf-8") as stream:
         return stream.read()
+
+
+def _amount(raw, label):
+    if not AMOUNT.fullmatch(raw):
+        raise ValueError(f"Invalid {label}")
+    return Decimal(raw)
+
+
+def _posted_key(invoice):
+    return invoice["vendor"].casefold(), invoice["number"].casefold()
 
 
 def parse_invoice(text):
@@ -24,30 +35,22 @@ def parse_invoice(text):
     fields = {}
     for field, labels in FIELDS.items():
         expression = "|".join(re.escape(label) for label in labels)
-        matches = re.findall(r"^(?:" + expression + r"):\s*(.*?)\s*$", text,
+        matches = re.findall(r"^[^\S\n]*(?:" + expression + r"):[^\S\n]*(.*?)[^\S\n]*$", text,
                              re.MULTILINE | re.IGNORECASE)
         if len(matches) != 1 or not matches[0]:
             raise ValueError(f"Expected exactly one nonempty {field} field")
         fields[field] = matches[0]
     lines = []
-    for raw in re.findall(r"^Item:\s*(.*?)\s*$", text, re.MULTILINE | re.IGNORECASE):
+    for raw in re.findall(r"^[^\S\n]*Item:[^\S\n]*(.*?)[^\S\n]*$", text, re.MULTILINE | re.IGNORECASE):
         parts = [part.strip() for part in raw.split("|")]
         if len(parts) != 4 or not parts[0]:
             raise ValueError("Item format: SKU | quantity | unit price | amount")
-        try:
-            quantity, price, amount = map(Decimal, parts[1:])
-        except InvalidOperation as error:
-            raise ValueError("Invalid item amount") from error
-        if not all(value.is_finite() for value in (quantity, price, amount)):
-            raise ValueError("Non-finite item amount")
+        quantity, price, amount = (_amount(part, "item amount") for part in parts[1:])
         lines.append({"sku": parts[0], "quantity": quantity, "unit_price": price, "amount": amount})
     if not lines:
         raise ValueError("At least one Item required")
-    try:
-        total = Decimal(fields["total"])
-    except InvalidOperation as error:
-        raise ValueError("Invalid total") from error
-    if not total.is_finite() or total < 0:
+    total = _amount(fields["total"], "total")
+    if total < 0:
         raise ValueError("Invalid total")
     return {"number": fields["invoice"], "vendor": fields["vendor"],
             "po_id": fields["po"], "total": total, "lines": lines}
@@ -55,8 +58,7 @@ def parse_invoice(text):
 
 def review(invoice, purchase_orders, posted):
     issues = []
-    key = (invoice["vendor"], invoice["number"])
-    if key in posted:
+    if _posted_key(invoice) in posted:
         issues.append("Invoice already posted")
     po = purchase_orders.get(invoice["po_id"])
     if po is None:
@@ -86,12 +88,12 @@ def review(invoice, purchase_orders, posted):
 
 
 def post_to_erp(invoice, purchase_orders, reviewer_approved, posted):
-    if not reviewer_approved:
+    if reviewer_approved is not True:
         raise PermissionError("Reviewer approval required")
     decision = review(invoice, purchase_orders, posted)
     if not decision["approved_for_review"]:
         raise ValueError("Resolve discrepancies before posting")
-    key = (invoice["vendor"], invoice["number"])
+    key = _posted_key(invoice)
     if key in posted:
         raise ValueError("Invoice already posted")
     record = {"invoice": invoice["number"], "vendor": invoice["vendor"],

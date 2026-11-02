@@ -1,7 +1,7 @@
 """Evaluate acceptance/rejection on versioned synthetic invoice texts."""
 import json
 from pathlib import Path
-from app import parse_invoice, review
+from app import _posted_key, parse_invoice, review
 from demo import PO
 
 
@@ -10,7 +10,7 @@ def evaluate(cases):
     for case in cases:
         try:
             invoice = parse_invoice(case["text"])
-            posted = {(invoice["vendor"], invoice["number"]): {}} if case.get("already_posted") else {}
+            posted = {_posted_key(invoice): {}} if case.get("already_posted") else {}
             accepted = review(invoice, PO, posted)["approved_for_review"]
         except ValueError:
             accepted = False

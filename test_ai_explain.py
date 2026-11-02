@@ -31,6 +31,13 @@ class AIAdapterTests(unittest.TestCase):
             with self.assertRaises(RuntimeError):
                 explain("incident", {})
 
+    def test_items_with_null_content_are_skipped(self):
+        body = {"output": [{"type": "reasoning", "content": None},
+                           {"type": "message", "content": [{"type": "output_text", "text": "ok"}]}]}
+
+        with patch.dict(os.environ, {"OPENAI_API_KEY": "test-key", "OPENAI_MODEL": "test-model"}):
+            self.assertEqual(explain("incident", {}, lambda request, timeout: Response(json.dumps(body).encode())), "ok")
+
 
 if __name__ == "__main__":
     unittest.main()
