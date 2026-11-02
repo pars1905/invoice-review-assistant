@@ -6,6 +6,21 @@ A standalone Python prototype for structured invoice review. It extracts fields 
 
 From the repository root run `python3 demo.py`, `python3 evaluate.py`, and `python3 -m unittest discover -v`. The demonstration uses synthetic plain-text invoices. `python3 demo.py path/to/invoice.pdf` accepts a text-layer PDF when `pdftotext` is installed; scanned PDFs need OCR, which this prototype does not include.
 
+## Isolated environment
+
+In GitHub, select **Code → Codespaces → Create codespace on main**, then run `python3 demo.py` in the terminal. The included `.devcontainer/devcontainer.json` selects Python 3.12. Text-layer PDF support in Codespaces needs `pdftotext` installed separately.
+
+With Docker installed locally, run:
+
+```bash
+docker build -t invoice-assistant .
+docker run --rm invoice-assistant
+docker run --rm invoice-assistant python evaluate.py
+docker run --rm invoice-assistant python -m unittest discover -v
+```
+
+The Docker image includes `pdftotext`. To use your own text-layer PDF, mount it read-only, for example `docker run --rm -v "$PWD/sample.pdf:/app/input.pdf:ro" invoice-assistant python demo.py /app/input.pdf`. The container runs a CLI demo; it does not publish a web service.
+
 For an optional model-written explanation, set `OPENAI_API_KEY` and `OPENAI_MODEL` in your shell and run `python3 demo.py --ai`. The model receives only the review decision, never authorizes posting, and this API path has not been tested with a real key. Usage may incur charges.
 
 Amounts use `Decimal`; each line item's quantity times unit price must match its amount, and the grand total must equal the line sum. Any missing field or mismatch blocks posting. Posting rechecks the invoice against the purchase order after approval, so a changed amount cannot bypass review. The parser intentionally accepts a narrow, documented format. Never upload confidential invoices to an external model without authorization.
